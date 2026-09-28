@@ -1,0 +1,20 @@
+{
+  "name": "@ot-safety/server",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test tests/*.test.js",
+    "test:api": "node scripts/verifyApiWorkflow.js",
+    "test:integration": "node scripts/verifyExpressIntegration.js",
+    "fixtures": "node scripts/generateDemoFixtures.js",
+    "key": "node scripts/generateEncryptionKey.js"
+  },
+  "dependencies": {
+    "express": "5.2.1",
+    "mongoose": "9.10.1",
+    "jose": "6.2.12"
+  }
+}

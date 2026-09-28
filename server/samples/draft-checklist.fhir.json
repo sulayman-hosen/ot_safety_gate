@@ -1,0 +1,592 @@
+{
+  "resourceType": "Bundle",
+  "id": "d880abf3-6d80-4b75-910a-cd675b7f457a",
+  "type": "document",
+  "identifier": {
+    "system": "urn:ot-safety-gate:document",
+    "value": "973c660b-44aa-4dc4-b7b5-39c12832d3b6"
+  },
+  "timestamp": "2026-09-22T08:17:35.635Z",
+  "meta": {
+    "tag": [
+      {
+        "system": "urn:ot-safety-gate:mode",
+        "code": "demo"
+      },
+      {
+        "system": "urn:ot-safety-gate:policy",
+        "code": "demo-policy-1.0"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:c5fabce3-79e1-4c97-9594-80162df1e699",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "973c660b-44aa-4dc4-b7b5-39c12832d3b6",
+        "identifier": {
+          "system": "urn:ot-safety-gate:document",
+          "value": "973c660b-44aa-4dc4-b7b5-39c12832d3b6"
+        },
+        "status": "preliminary",
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "34109-9",
+              "display": "Note"
+            }
+          ],
+          "text": "Pre-operative safety checklist"
+        },
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        },
+        "encounter": {
+          "reference": "urn:uuid:8bb53a65-0769-4511-92c7-bdb6d9423c0b"
+        },
+        "date": "2026-09-22T08:17:35.635Z",
+        "author": [
+          {
+            "reference": "urn:uuid:6f417b32-1093-442e-b3c2-b3e29ce7f07b"
+          }
+        ],
+        "title": "[SYNTHETIC] Draft Pre-operative safety checklist",
+        "confidentiality": "R",
+        "custodian": {
+          "reference": "urn:uuid:88fc0f99-1ff0-4a7b-b883-9c23df4c6889"
+        },
+        "section": [
+          {
+            "title": "Procedure and diagnosis",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "47519-4"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Scheduled order: Laparoscopic appendectomy. Scheduled time: 2026-09-22T10:17:35.635Z. Diagnoses: Appendicitis. Order and linked diagnosis match the configured example association.</p></div>"
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:bed71824-258c-4e33-ab64-bb06aed37223"
+              },
+              {
+                "reference": "urn:uuid:cb6e1362-062b-4c28-a27c-7c21c74271d3"
+              }
+            ]
+          },
+          {
+            "title": "Consent evidence",
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Linked consent and patient signature evidence are recorded. The team must inspect the source; cryptographic signature validity is not established.</p></div>"
+            }
+          },
+          {
+            "title": "Allergies and planned medication",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48765-2"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Allergy evidence: No known allergy. Surgery-linked active medication orders: Cefazolin. Recent explicit no-known-allergy evidence found. Confirm at the bedside.</p></div>"
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:a1622c9d-4db5-45e4-9e19-01850aecb067"
+              },
+              {
+                "reference": "urn:uuid:bd36ceba-d9cb-42f2-aa53-506e1462cb87"
+              }
+            ]
+          },
+          {
+            "title": "Laboratory results",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "30954-2"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Platelets (LOINC 777-3): 242 10*9/L; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</p><p>INR (LOINC 6301-6): 1 1; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</p><p>Prothrombin time (LOINC 5902-2): 12.4 s; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</p><p>aPTT (LOINC 14979-9): 29 s; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</p></div>"
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:f3518b3a-77cd-4bc3-88d0-39a131c0531d"
+              },
+              {
+                "reference": "urn:uuid:f1f53d11-5ac2-4c23-89c8-c4e89391aad8"
+              },
+              {
+                "reference": "urn:uuid:fcb48281-662c-428b-a860-ca828fb390a0"
+              },
+              {
+                "reference": "urn:uuid:a6a7e295-3e46-4a53-8b80-be31cad3e414"
+              }
+            ]
+          },
+          {
+            "title": "Assessment and team review",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "51848-0"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Evidence state: reviewable. Policy: demo-policy-1.0. </p><p>Procedure &amp; diagnosis: PASS; Procedure consent: PASS; Antibiotics &amp; allergies: PASS; Coagulation &amp; platelets: PASS.</p><p>DRAFT — not attested.</p><p>Team note: Generated synthetic sample for candidate evaluation.</p><p>This is a pre-operative evidence checklist, not an operative report or authorization to proceed. SYNTHETIC DEMONSTRATION. No real patient or legal signature.</p></div>"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "demo-patient",
+        "identifier": [
+          {
+            "system": "urn:orbit:synthetic-mrn",
+            "value": "DEMO-2048"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Alex"
+            ],
+            "family": "Morgan"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1990-04-18"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6f417b32-1093-442e-b3c2-b3e29ce7f07b",
+      "resource": {
+        "resourceType": "Device",
+        "id": "ot-safety-gate",
+        "deviceName": [
+          {
+            "name": "OT safety gate checklist generator",
+            "type": "user-friendly-name"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:88fc0f99-1ff0-4a7b-b883-9c23df4c6889",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "note-custodian",
+        "name": "ORBIT synthetic demonstration"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8bb53a65-0769-4511-92c7-bdb6d9423c0b",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "demo-encounter",
+        "status": "in-progress",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "IMP"
+        },
+        "period": {
+          "start": "2026-09-22T00:17:35.635Z"
+        },
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cb6e1362-062b-4c28-a27c-7c21c74271d3",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "demo-diagnosis",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ],
+          "text": "Active"
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ],
+          "text": "Confirmed"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "74400008",
+              "display": "Appendicitis"
+            }
+          ],
+          "text": "Appendicitis"
+        },
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a1622c9d-4db5-45e4-9e19-01850aecb067",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "demo-allergy",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ],
+          "text": "Active"
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ],
+          "text": "Confirmed"
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "716186003",
+              "display": "No known allergy"
+            }
+          ],
+          "text": "No known allergy"
+        },
+        "recordedDate": "2026-09-22T07:17:35.635Z",
+        "patient": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f3518b3a-77cd-4bc3-88d0-39a131c0531d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "demo-platelets",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ],
+            "text": "Laboratory"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "777-3",
+              "display": "Platelets"
+            }
+          ],
+          "text": "Platelets"
+        },
+        "effectiveDateTime": "2026-09-22T05:17:35.635Z",
+        "issued": "2026-09-22T05:29:35.635Z",
+        "valueQuantity": {
+          "value": 242,
+          "unit": "10*9/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "10*9/L"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 100,
+              "unit": "10*9/L"
+            },
+            "high": {
+              "value": 450,
+              "unit": "10*9/L"
+            },
+            "text": "Synthetic example range; not a clinical recommendation"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f1f53d11-5ac2-4c23-89c8-c4e89391aad8",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "demo-inr",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ],
+            "text": "Laboratory"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "6301-6",
+              "display": "INR"
+            }
+          ],
+          "text": "INR"
+        },
+        "effectiveDateTime": "2026-09-22T05:17:35.635Z",
+        "issued": "2026-09-22T05:29:35.635Z",
+        "valueQuantity": {
+          "value": 1,
+          "unit": "1",
+          "system": "http://unitsofmeasure.org",
+          "code": "1"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 0.8,
+              "unit": "1"
+            },
+            "high": {
+              "value": 1.5,
+              "unit": "1"
+            },
+            "text": "Synthetic example range; not a clinical recommendation"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fcb48281-662c-428b-a860-ca828fb390a0",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "demo-pt",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ],
+            "text": "Laboratory"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "5902-2",
+              "display": "Prothrombin time"
+            }
+          ],
+          "text": "Prothrombin time"
+        },
+        "effectiveDateTime": "2026-09-22T05:17:35.635Z",
+        "issued": "2026-09-22T05:29:35.635Z",
+        "valueQuantity": {
+          "value": 12.4,
+          "unit": "s",
+          "system": "http://unitsofmeasure.org",
+          "code": "s"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 10,
+              "unit": "s"
+            },
+            "high": {
+              "value": 15,
+              "unit": "s"
+            },
+            "text": "Synthetic example range; not a clinical recommendation"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a6a7e295-3e46-4a53-8b80-be31cad3e414",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "demo-aptt",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ],
+            "text": "Laboratory"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "14979-9",
+              "display": "aPTT"
+            }
+          ],
+          "text": "aPTT"
+        },
+        "effectiveDateTime": "2026-09-22T05:17:35.635Z",
+        "issued": "2026-09-22T05:29:35.635Z",
+        "valueQuantity": {
+          "value": 29,
+          "unit": "s",
+          "system": "http://unitsofmeasure.org",
+          "code": "s"
+        },
+        "referenceRange": [
+          {
+            "low": {
+              "value": 25,
+              "unit": "s"
+            },
+            "high": {
+              "value": 35,
+              "unit": "s"
+            },
+            "text": "Synthetic example range; not a clinical recommendation"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bed71824-258c-4e33-ab64-bb06aed37223",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "demo-surgery",
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "387713003",
+                "display": "Surgical procedure"
+              }
+            ],
+            "text": "Surgical procedure"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "44970",
+              "display": "Laparoscopic appendectomy"
+            }
+          ],
+          "text": "Laparoscopic appendectomy"
+        },
+        "occurrenceDateTime": "2026-09-22T10:17:35.635Z",
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "66754008",
+                "display": "Appendix structure"
+              }
+            ],
+            "text": "Appendix structure"
+          }
+        ],
+        "authoredOn": "2026-09-22T00:17:35.635Z",
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bd36ceba-d9cb-42f2-aa53-506e1462cb87",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "demo-antibiotic",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+              "code": "2180",
+              "display": "Cefazolin"
+            }
+          ],
+          "text": "Cefazolin"
+        },
+        "authoredOn": "2026-09-22T06:17:35.635Z",
+        "subject": {
+          "reference": "urn:uuid:3ff807fe-fb45-4c71-821f-a914bd7b3f6c"
+        }
+      }
+    }
+  ]
+}

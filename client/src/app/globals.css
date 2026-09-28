@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand: #000000;
+  --color-brand-dark: #18181b;
+  --color-brand-soft: #f4f4f5;
+  --color-ink: #000000;
+  --color-muted: #52525b;
+  --color-surface: #f9fafb;
+  --color-card: #ffffff;
+  --color-card-subtle: #f4f4f5;
+  --color-line: #e4e4e7;
+}
+
+.dark {
+  --color-brand: #ffffff;
+  --color-brand-dark: #f4f4f5;
+  --color-brand-soft: #27272a;
+  --color-ink: #ffffff;
+  --color-muted: #a1a1aa;
+  --color-surface: #09090b;
+  --color-card: #18181b;
+  --color-card-subtle: #27272a;
+  --color-line: #3f3f46;
+}
+
+@theme inline {
+  --font-heading: var(--font-roboto), Arial, sans-serif;
+  --font-body: var(--font-inter), Arial, sans-serif;
+  --color-brand: var(--color-brand);
+  --color-brand-dark: var(--color-brand-dark);
+  --color-brand-soft: var(--color-brand-soft);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-surface: var(--color-surface);
+  --color-card: var(--color-card);
+  --color-card-subtle: var(--color-card-subtle);
+  --color-line: var(--color-line);
+}
+
+@layer base {
+  body {
+    @apply font-body antialiased;
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+    color: var(--color-ink) !important;
+  }
+  p {
+    @apply font-body;
+    font-size: 16px;
+    color: var(--color-ink);
+  }
+  /* span tag text size 12px for all devices */
+  span {
+    @apply font-body;
+    font-size: 12px;
+    color: var(--color-ink);
+  }
+  button, select {
+    @apply cursor-pointer;
+  }
+  button:disabled, select:disabled, textarea:disabled, fieldset:disabled label {
+    @apply cursor-not-allowed;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-black dark:outline-white;
+  }
+  [id] {
+    scroll-margin-top: 24px;
+  }
+}
+
+/* Explicit responsive span 12px enforcement for all devices */
+@media (max-width: 640px) {
+  span {
+    font-size: 12px;
+  }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  span {
+    font-size: 12px;
+  }
+}
+@media (min-width: 1025px) {
+  span {
+    font-size: 12px;
+  }
+}
+
+/* Strict Black and White Text Enforcement */
+body {
+  color: #000000;
+}
+.dark body {
+  color: #ffffff;
+}
+
+p, span, h1, h2, h3, h4, h5, h6, label, dt, dd, th, td, input, select, textarea {
+  color: #000000;
+}
+
+.dark p,
+.dark span,
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark label,
+.dark dt,
+.dark dd,
+.dark th,
+.dark td,
+.dark input,
+.dark select,
+.dark textarea {
+  color: #ffffff;
+}
+
+.text-ink {
+  color: #000000 !important;
+}
+.dark .text-ink {
+  color: #ffffff !important;
+}
+
+.text-brand {
+  color: #000000 !important;
+}
+.dark .text-brand {
+  color: #ffffff !important;
+}
+
+.text-muted {
+  color: #52525b !important;
+}
+.dark .text-muted {
+  color: #a1a1aa !important;
+}
+
+/* Neutralize all colored text into crisp Black in light mode and White in dark mode */
+.text-emerald-700,
+.text-emerald-800,
+.text-emerald-900,
+.text-emerald-950,
+.text-amber-700,
+.text-amber-800,
+.text-amber-900,
+.text-amber-950,
+.text-rose-600,
+.text-rose-700,
+.text-rose-800,
+.text-rose-900,
+.text-rose-950,
+.text-teal-700,
+.text-teal-800,
+.text-teal-900 {
+  color: #000000 !important;
+}
+
+.dark .text-emerald-200,
+.dark .text-emerald-300,
+.dark .text-emerald-400,
+.dark .text-amber-200,
+.dark .text-amber-300,
+.dark .text-amber-400,
+.dark .text-rose-200,
+.dark .text-rose-300,
+.dark .text-rose-400,
+.dark .text-teal-200,
+.dark .text-teal-300,
+.dark .text-teal-400 {
+  color: #ffffff !important;
+}
+
+/* Dark mode surface & card adaptations */
+.dark .bg-white {
+  background-color: var(--color-card) !important;
+}
+.dark .bg-surface {
+  background-color: var(--color-surface) !important;
+}
+.dark .bg-surface\/50 {
+  background-color: rgba(24, 24, 27, 0.5) !important;
+}
+.dark .bg-surface\/60 {
+  background-color: rgba(24, 24, 27, 0.6) !important;
+}
+.dark .bg-surface\/70 {
+  background-color: rgba(24, 24, 27, 0.7) !important;
+}
+.dark .hover\:bg-surface:hover {
+  background-color: var(--color-card-subtle) !important;
+}
+.dark .border-line {
+  border-color: var(--color-line) !important;
+}
+.dark .divide-line > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--color-line) !important;
+}
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: var(--color-card) !important;
+  color: #ffffff !important;
+  border-color: var(--color-line) !important;
+}
+.dark select option {
+  background-color: var(--color-card);
+  color: #ffffff;
+}
+.dark dialog {
+  background-color: var(--color-card) !important;
+  color: #ffffff !important;
+  border-color: var(--color-line) !important;
+}

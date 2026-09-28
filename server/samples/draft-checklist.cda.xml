@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+  <id root="973c660b-44aa-4dc4-b7b5-39c12832d3b6"/>
+  <code code="34109-9" codeSystem="2.16.840.1.113883.6.1" displayName="Note"/>
+  <title>SYNTHETIC — DRAFT — Pre-operative safety checklist</title>
+  <effectiveTime value="20260922081735+0000"/>
+  <confidentialityCode code="R" codeSystem="2.16.840.1.113883.5.25"/>
+  <languageCode code="en-US"/>
+  <recordTarget><patientRole><id nullFlavor="NI"/><patient><name>Alex Morgan</name><administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1"/><birthTime value="19900418"/></patient></patientRole></recordTarget>
+  <author><time value="20260922081735+0000"/><assignedAuthor><id nullFlavor="NI"/><assignedPerson><name>OT safety gate draft generator</name></assignedPerson></assignedAuthor></author>
+  <custodian><assignedCustodian><representedCustodianOrganization><id nullFlavor="NI"/><name>ORBIT synthetic demonstration</name></representedCustodianOrganization></assignedCustodian></custodian>
+  <component><structuredBody>
+    <component><section><code code="47519-4" codeSystem="2.16.840.1.113883.6.1"/><title>Procedure and diagnosis</title><text><paragraph>Scheduled order: Laparoscopic appendectomy. Scheduled time: 2026-09-22T10:17:35.635Z. Diagnoses: Appendicitis. Order and linked diagnosis match the configured example association.</paragraph></text></section></component>
+    <component><section><code nullFlavor="OTH"/><title>Consent evidence</title><text><paragraph>Linked consent and patient signature evidence are recorded. The team must inspect the source; cryptographic signature validity is not established.</paragraph></text></section></component>
+    <component><section><code code="48765-2" codeSystem="2.16.840.1.113883.6.1"/><title>Allergies and planned medication</title><text><paragraph>Allergy evidence: No known allergy. Surgery-linked active medication orders: Cefazolin. Recent explicit no-known-allergy evidence found. Confirm at the bedside.</paragraph></text></section></component>
+    <component><section><code code="30954-2" codeSystem="2.16.840.1.113883.6.1"/><title>Laboratory results</title><text><paragraph>Platelets (LOINC 777-3): 242 10*9/L; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</paragraph><paragraph>INR (LOINC 6301-6): 1 1; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</paragraph><paragraph>Prothrombin time (LOINC 5902-2): 12.4 s; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</paragraph><paragraph>aPTT (LOINC 14979-9): 29 s; collected 2026-09-22T05:17:35.635Z; PASS: Within the configured example range.</paragraph></text></section></component>
+    <component><section><code code="51848-0" codeSystem="2.16.840.1.113883.6.1"/><title>Assessment and team review</title><text><paragraph>Evidence state: reviewable. Policy: demo-policy-1.0. </paragraph><paragraph>Procedure &amp; diagnosis: PASS; Procedure consent: PASS; Antibiotics &amp; allergies: PASS; Coagulation &amp; platelets: PASS.</paragraph><paragraph>DRAFT — not attested.</paragraph><paragraph>Team note: Generated synthetic sample for candidate evaluation.</paragraph><paragraph>This is a pre-operative evidence checklist, not an operative report or authorization to proceed. SYNTHETIC DEMONSTRATION. No real patient or legal signature.</paragraph></text></section></component>
+  </structuredBody></component>
+</ClinicalDocument>
