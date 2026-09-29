@@ -7,11 +7,19 @@ export default function StatusBadge({ status, short = false }) {
   const { language } = useApp();
 
   const styles = {
-    pass: 'border-neutral-300 bg-neutral-100 text-black dark:border-neutral-700 dark:bg-neutral-800 dark:text-white',
-    reviewable: 'border-neutral-300 bg-neutral-100 text-black dark:border-neutral-700 dark:bg-neutral-800 dark:text-white',
-    review: 'border-neutral-400 bg-neutral-100 text-black dark:border-neutral-600 dark:bg-neutral-800 dark:text-white',
-    block: 'border-black bg-neutral-200 text-black font-extrabold dark:border-white dark:bg-neutral-800 dark:text-white',
-    blocked: 'border-black bg-neutral-200 text-black font-extrabold dark:border-white dark:bg-neutral-800 dark:text-white'
+    pass: 'border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 dark:border-emerald-500/30',
+    reviewable: 'border-sky-500/25 bg-sky-500/10 text-sky-700 dark:text-sky-400 dark:border-sky-500/30',
+    review: 'border-amber-500/25 bg-amber-500/10 text-amber-700 dark:text-amber-400 dark:border-amber-500/30',
+    block: 'border-rose-500/25 bg-rose-500/10 text-rose-700 dark:text-rose-400 dark:border-rose-500/30 font-bold',
+    blocked: 'border-rose-500/25 bg-rose-500/10 text-rose-700 dark:text-rose-400 dark:border-rose-500/30 font-bold'
+  };
+
+  const iconStyles = {
+    pass: 'text-emerald-600 dark:text-emerald-400',
+    reviewable: 'text-sky-600 dark:text-sky-400',
+    review: 'text-amber-600 dark:text-amber-400',
+    block: 'text-rose-600 dark:text-rose-400',
+    blocked: 'text-rose-600 dark:text-rose-400'
   };
 
   const labelsEn = {
@@ -35,8 +43,8 @@ export default function StatusBadge({ status, short = false }) {
   const label = labelMap[status] || STATUS_LABELS[status] || (language === 'bn' ? 'পর্যালোচনা প্রয়োজন' : 'Needs review');
 
   return (
-    <span className={`inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-md border px-2 py-1 text-xs font-semibold ${styles[status] || styles.review}`}>
-      <ClinicalIcon name={good ? 'check' : 'warning'} size={13} className="text-black dark:text-white" />
+    <span className={`inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-md border px-2 py-0.5 font-mono text-[11px] font-semibold tracking-wide ${styles[status] || styles.review}`}>
+      <ClinicalIcon name={good ? 'check' : 'warning'} size={12} className={iconStyles[status] || 'text-amber-600 dark:text-amber-400'} />
       <span>{label}</span>
     </span>
   );

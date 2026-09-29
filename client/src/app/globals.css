@@ -1,32 +1,34 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --color-brand: #000000;
+  --color-brand: #09090b;
   --color-brand-dark: #18181b;
   --color-brand-soft: #f4f4f5;
-  --color-ink: #000000;
-  --color-muted: #52525b;
-  --color-surface: #f9fafb;
+  --color-ink: #09090b;
+  --color-muted: #71717a;
+  --color-surface: #fafafa;
   --color-card: #ffffff;
   --color-card-subtle: #f4f4f5;
   --color-line: #e4e4e7;
 }
 
 .dark {
-  --color-brand: #ffffff;
+  --color-brand: #fafafa;
   --color-brand-dark: #f4f4f5;
   --color-brand-soft: #27272a;
-  --color-ink: #ffffff;
+  --color-ink: #f4f4f5;
   --color-muted: #a1a1aa;
   --color-surface: #09090b;
-  --color-card: #18181b;
-  --color-card-subtle: #27272a;
-  --color-line: #3f3f46;
+  --color-card: #121215;
+  --color-card-subtle: #18181b;
+  --color-line: #27272a;
 }
 
 @theme inline {
-  --font-heading: var(--font-roboto), Arial, sans-serif;
-  --font-body: var(--font-inter), Arial, sans-serif;
+  --font-heading: var(--font-roboto), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --color-brand: var(--color-brand);
   --color-brand-dark: var(--color-brand-dark);
   --color-brand-soft: var(--color-brand-soft);
@@ -39,183 +41,50 @@
 }
 
 @layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
   body {
     @apply font-body antialiased;
     background-color: var(--color-surface);
     color: var(--color-ink);
     transition: background-color 0.2s ease, color 0.2s ease;
   }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
-    color: var(--color-ink) !important;
+    @apply font-heading tracking-tight;
   }
-  p {
-    @apply font-body;
-    font-size: 16px;
-    color: var(--color-ink);
-  }
-  /* span tag text size 12px for all devices */
-  span {
-    @apply font-body;
-    font-size: 12px;
-    color: var(--color-ink);
-  }
+
   button, select {
     @apply cursor-pointer;
   }
+
   button:disabled, select:disabled, textarea:disabled, fieldset:disabled label {
-    @apply cursor-not-allowed;
+    @apply cursor-not-allowed opacity-50;
   }
+
   :focus-visible {
-    @apply outline-2 outline-offset-4 outline-black dark:outline-white;
+    @apply outline-2 outline-offset-2 outline-zinc-900 dark:outline-zinc-100;
   }
+
   [id] {
     scroll-margin-top: 24px;
   }
 }
 
-/* Explicit responsive span 12px enforcement for all devices */
-@media (max-width: 640px) {
-  span {
-    font-size: 12px;
-  }
+/* Custom scrollbars for clean developer aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-@media (min-width: 641px) and (max-width: 1024px) {
-  span {
-    font-size: 12px;
-  }
+::-webkit-scrollbar-track {
+  background: transparent;
 }
-@media (min-width: 1025px) {
-  span {
-    font-size: 12px;
-  }
+::-webkit-scrollbar-thumb {
+  background: rgba(160, 160, 160, 0.25);
+  border-radius: 9999px;
 }
-
-/* Strict Black and White Text Enforcement */
-body {
-  color: #000000;
-}
-.dark body {
-  color: #ffffff;
-}
-
-p, span, h1, h2, h3, h4, h5, h6, label, dt, dd, th, td, input, select, textarea {
-  color: #000000;
-}
-
-.dark p,
-.dark span,
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6,
-.dark label,
-.dark dt,
-.dark dd,
-.dark th,
-.dark td,
-.dark input,
-.dark select,
-.dark textarea {
-  color: #ffffff;
-}
-
-.text-ink {
-  color: #000000 !important;
-}
-.dark .text-ink {
-  color: #ffffff !important;
-}
-
-.text-brand {
-  color: #000000 !important;
-}
-.dark .text-brand {
-  color: #ffffff !important;
-}
-
-.text-muted {
-  color: #52525b !important;
-}
-.dark .text-muted {
-  color: #a1a1aa !important;
-}
-
-/* Neutralize all colored text into crisp Black in light mode and White in dark mode */
-.text-emerald-700,
-.text-emerald-800,
-.text-emerald-900,
-.text-emerald-950,
-.text-amber-700,
-.text-amber-800,
-.text-amber-900,
-.text-amber-950,
-.text-rose-600,
-.text-rose-700,
-.text-rose-800,
-.text-rose-900,
-.text-rose-950,
-.text-teal-700,
-.text-teal-800,
-.text-teal-900 {
-  color: #000000 !important;
-}
-
-.dark .text-emerald-200,
-.dark .text-emerald-300,
-.dark .text-emerald-400,
-.dark .text-amber-200,
-.dark .text-amber-300,
-.dark .text-amber-400,
-.dark .text-rose-200,
-.dark .text-rose-300,
-.dark .text-rose-400,
-.dark .text-teal-200,
-.dark .text-teal-300,
-.dark .text-teal-400 {
-  color: #ffffff !important;
-}
-
-/* Dark mode surface & card adaptations */
-.dark .bg-white {
-  background-color: var(--color-card) !important;
-}
-.dark .bg-surface {
-  background-color: var(--color-surface) !important;
-}
-.dark .bg-surface\/50 {
-  background-color: rgba(24, 24, 27, 0.5) !important;
-}
-.dark .bg-surface\/60 {
-  background-color: rgba(24, 24, 27, 0.6) !important;
-}
-.dark .bg-surface\/70 {
-  background-color: rgba(24, 24, 27, 0.7) !important;
-}
-.dark .hover\:bg-surface:hover {
-  background-color: var(--color-card-subtle) !important;
-}
-.dark .border-line {
-  border-color: var(--color-line) !important;
-}
-.dark .divide-line > :not([hidden]) ~ :not([hidden]) {
-  border-color: var(--color-line) !important;
-}
-.dark input,
-.dark select,
-.dark textarea {
-  background-color: var(--color-card) !important;
-  color: #ffffff !important;
-  border-color: var(--color-line) !important;
-}
-.dark select option {
-  background-color: var(--color-card);
-  color: #ffffff;
-}
-.dark dialog {
-  background-color: var(--color-card) !important;
-  color: #ffffff !important;
-  border-color: var(--color-line) !important;
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 160, 160, 0.4);
 }

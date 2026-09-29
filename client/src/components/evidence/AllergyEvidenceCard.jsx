@@ -12,11 +12,11 @@ export default function AllergyEvidenceCard({ data, assessment, onInspect }) {
     <EvidenceCard check={check} number="03" icon="shield" onInspect={onInspect}>
       <EvidenceDetail label={t('plannedMedication')}>
         <div className="flex flex-col items-end">
-          <span className="text-black dark:text-white">{medications.map(medication => formatConcept(medication.medicationCodeableConcept)).join(', ') || t('unknown')}</span>
+          <span className="text-zinc-900 dark:text-zinc-100">{medications.map(medication => formatConcept(medication.medicationCodeableConcept)).join(', ') || t('unknown')}</span>
           <button
             type="button"
             onClick={() => openKeyTerms('rxnorm')}
-            className="mt-0.5 text-[10px] font-bold text-black dark:text-white underline"
+            className="mt-0.5 font-mono text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 underline transition-colors"
             title="Click to learn about RxNorm standardized drug codes"
           >
             RxNorm catalog check
@@ -24,11 +24,11 @@ export default function AllergyEvidenceCard({ data, assessment, onInspect }) {
         </div>
       </EvidenceDetail>
 
-      <div className="mt-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-3">
-        <p className="text-[10px] font-bold tracking-[.1em] text-neutral-600 dark:text-neutral-400">
+      <div className="mt-3 rounded-lg border border-line bg-surface p-3">
+        <p className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
           {t('recordedAllergyStatus')}
         </p>
-        <p className="mt-1.5 text-xs font-bold text-black dark:text-white">
+        <p className="mt-1 text-xs font-semibold text-zinc-900 dark:text-zinc-100">
           {data.allergies.map(allergy => formatConcept(allergy.code)).join(', ') || t('noRecordsReturned')}
         </p>
       </div>

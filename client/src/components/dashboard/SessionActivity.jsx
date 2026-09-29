@@ -11,21 +11,21 @@ export default function SessionActivity({ events, record }) {
   ];
 
   return (
-    <section id="activity" className="rounded-xl border border-line bg-card p-5 sm:p-6 shadow-sm transition-colors">
-      <div className="mb-5 flex items-center justify-between">
-        <h2 className="text-base font-bold text-black dark:text-white sm:text-lg">{t('recentActivity')}</h2>
-        <ClinicalIcon name="clock" size={18} className="text-black dark:text-white" />
+    <section id="activity" className="rounded-xl border border-line bg-card p-5 sm:p-6 shadow-2xs hover:shadow-xs transition-shadow">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 sm:text-lg tracking-tight">{t('recentActivity')}</h2>
+        <ClinicalIcon name="clock" size={16} className="text-zinc-400 dark:text-zinc-500" />
       </div>
 
-      <div className="space-y-3.5">
+      <div className="space-y-3">
         {activity.length === 0 ? (
-          <p className="text-xs text-neutral-600 dark:text-neutral-400">No session activity recorded yet.</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">No session activity recorded yet.</p>
         ) : (
           activity.map((event, index) => (
-            <div key={`${event.at}-${index}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-              <span className="size-2 rounded-full bg-black dark:bg-white" />
-              <span className="font-bold text-black dark:text-white">{event.action}</span>
-              <time dateTime={event.at} className="ml-auto text-xs font-semibold text-neutral-600 dark:text-neutral-400">
+            <div key={`${event.at}-${index}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs py-1 border-b border-line/40 last:border-0">
+              <span className="size-1.5 rounded-full bg-emerald-500 shrink-0" />
+              <span className="font-semibold text-zinc-800 dark:text-zinc-200">{event.action}</span>
+              <time dateTime={event.at} className="ml-auto font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
                 {formatDate(event.at)}
               </time>
             </div>

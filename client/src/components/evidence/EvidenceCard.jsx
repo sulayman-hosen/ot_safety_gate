@@ -5,9 +5,9 @@ import { useApp } from '@/context/AppContext.jsx';
 
 export function EvidenceDetail({ label, children }) {
   return (
-    <div className="flex items-start justify-between gap-4 py-2.5 text-xs">
-      <span className="shrink-0 font-medium text-neutral-600 dark:text-neutral-400">{label}</span>
-      <span className="max-w-[65%] text-right font-bold text-black dark:text-white break-words">{children}</span>
+    <div className="flex items-start justify-between gap-4 py-2 text-xs border-b border-line/60 last:border-0">
+      <span className="shrink-0 font-medium text-zinc-500 dark:text-zinc-400">{label}</span>
+      <span className="max-w-[65%] text-right font-semibold text-zinc-900 dark:text-zinc-100 break-words">{children}</span>
     </div>
   );
 }
@@ -30,19 +30,20 @@ export default function EvidenceCard({ check, number, icon, onInspect, children 
   };
 
   const title = (language === 'bn' ? titleBnMap[check.id] : titleEnMap[check.id]) || check.title;
+  const isPass = check.status === 'pass';
 
   return (
-    <article className="flex flex-col rounded-xl border border-line bg-card p-5 sm:p-6 shadow-sm transition-colors">
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+    <article className="flex flex-col rounded-xl border border-line bg-card p-5 sm:p-6 shadow-2xs hover:shadow-xs transition-shadow">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-xl bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white shadow-inner">
-            <ClinicalIcon name={icon} size={20} />
-          </span>
+          <div className="grid size-10 place-items-center rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs">
+            <ClinicalIcon name={icon} size={18} />
+          </div>
           <div>
-            <p className="text-[10px] font-bold tracking-[.15em] text-neutral-600 dark:text-neutral-400">
+            <p className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
               {language === 'bn' ? `যাচাই ${number}` : `CHECK ${number}`}
             </p>
-            <h3 className="mt-1 text-base font-bold text-black dark:text-white sm:text-lg">
+            <h3 className="mt-0.5 text-base font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
               {title}
             </h3>
           </div>
@@ -50,25 +51,29 @@ export default function EvidenceCard({ check, number, icon, onInspect, children 
         <StatusBadge status={check.status} />
       </div>
 
-      <div>{children}</div>
+      <div className="divide-y divide-line/40">{children}</div>
 
-      <p
-        className="mt-4 flex items-start gap-2 rounded-lg p-3 text-xs leading-5 border border-neutral-300 bg-neutral-100/90 text-black dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-white"
+      <div
+        className={`mt-4 flex items-start gap-2.5 rounded-lg p-3 text-xs leading-5 border font-medium ${
+          isPass
+            ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300'
+            : 'border-amber-500/25 bg-amber-500/10 text-amber-900 dark:text-amber-300'
+        }`}
       >
         <ClinicalIcon
-          name={check.status === 'pass' ? 'check' : 'warning'}
-          size={15}
-          className="mt-0.5 shrink-0 text-black dark:text-white"
+          name={isPass ? 'check' : 'warning'}
+          size={14}
+          className={`mt-0.5 shrink-0 ${isPass ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}
         />
         <span>{check.message}</span>
-      </p>
+      </div>
 
       <button
         onClick={onInspect}
-        className="mt-4 inline-flex w-fit items-center gap-1.5 text-xs font-bold text-black dark:text-white hover:underline"
+        className="mt-3.5 inline-flex w-fit items-center gap-1.5 font-mono text-[11px] font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
       >
         <span>{t('inspectEvidence')}</span>
-        <ClinicalIcon name="external" size={13} className="text-black dark:text-white" />
+        <ClinicalIcon name="external" size={12} className="text-zinc-400 dark:text-zinc-500" />
       </button>
     </article>
   );

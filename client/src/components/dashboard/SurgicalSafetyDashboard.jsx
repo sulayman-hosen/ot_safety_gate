@@ -104,14 +104,14 @@ export default function SurgicalSafetyDashboard() {
           {error && (
             <div
               role="alert"
-              className="mb-5 flex items-start gap-3 rounded-xl border border-neutral-400 bg-neutral-100 text-black dark:border-neutral-600 dark:bg-neutral-800 dark:text-white p-4 text-xs leading-6 shadow-sm"
+              className="mb-5 flex items-start gap-3 rounded-xl border border-rose-500/30 bg-rose-500/10 text-rose-800 dark:text-rose-200 p-4 text-xs leading-relaxed shadow-2xs"
             >
-              <ClinicalIcon name="warning" size={18} className="mt-0.5 shrink-0 text-black dark:text-white" />
-              <span className="flex-1 font-bold">{error}</span>
+              <ClinicalIcon name="warning" size={17} className="mt-0.5 shrink-0 text-rose-600 dark:text-rose-400" />
+              <span className="flex-1 font-semibold">{error}</span>
               <button
                 aria-label="Dismiss error"
                 onClick={() => setError('')}
-                className="text-black dark:text-white hover:opacity-75"
+                className="text-rose-600 dark:text-rose-400 hover:opacity-75"
               >
                 <ClinicalIcon name="close" size={16} />
               </button>
@@ -121,9 +121,9 @@ export default function SurgicalSafetyDashboard() {
           {toast && (
             <div
               role="status"
-              className="mb-5 flex items-center gap-2 rounded-xl border border-neutral-400 bg-neutral-100 text-black dark:border-neutral-600 dark:bg-neutral-800 dark:text-white p-4 text-xs font-bold shadow-sm"
+              className="mb-5 flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-800 dark:text-emerald-200 p-3.5 text-xs font-semibold shadow-2xs"
             >
-              <ClinicalIcon name="check" size={18} className="text-black dark:text-white shrink-0" />
+              <ClinicalIcon name="check" size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>{toast}</span>
             </div>
           )}
@@ -142,14 +142,13 @@ export default function SurgicalSafetyDashboard() {
               {/* Header Title & Actions */}
               <div className="mb-6 flex flex-wrap items-center justify-between gap-5">
                 <div>
-                  <p className="text-[10px] font-bold tracking-[.15em] text-neutral-600 dark:text-neutral-400">
+                  <p className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
                     {t('safetyWorkspace')}
                   </p>
-                  <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-[34px] text-black dark:text-white">
+                  <h1 className="mt-1.5 text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
                     {t('safetyGateTitle')}
-                    <span className="text-black dark:text-white">.</span>
                   </h1>
-                  <p className="mt-1.5 text-xs leading-6 text-neutral-600 dark:text-neutral-400 font-semibold">
+                  <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
                     {t('safetyGateSubtitle')}
                   </p>
                 </div>
@@ -167,21 +166,21 @@ export default function SurgicalSafetyDashboard() {
 
               {/* Demo Mode Scenario Selector */}
               {session.mode === 'demo' && (
-                <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-card px-4 py-3 shadow-sm">
-                  <p className="flex items-center gap-2 text-xs text-neutral-600 dark:text-neutral-400 font-semibold">
-                    <span className="rounded bg-black text-white dark:bg-white dark:text-black px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider">
+                <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-card px-4 py-3 shadow-2xs">
+                  <p className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 font-medium">
+                    <span className="rounded bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wider">
                       DEMO
                     </span>
                     <span>Synthetic patient · example clinical policy</span>
                   </p>
-                  <label className="flex items-center gap-2 text-xs font-bold text-black dark:text-white">
+                  <label className="flex items-center gap-2 text-xs font-medium text-zinc-700 dark:text-zinc-300">
                     <span>{t('testScenario')}</span>
                     <select
                       aria-label="Test scenario"
                       disabled={busy}
                       value={session.scenario}
                       onChange={event => openDemo(event.target.value)}
-                      className="max-w-52 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-surface px-2.5 py-1.5 text-xs font-bold text-black dark:text-white shadow-sm focus:outline-none"
+                      className="max-w-56 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 font-mono text-xs font-semibold text-zinc-800 dark:text-zinc-200 shadow-2xs focus:outline-none"
                     >
                       {DEMO_SCENARIOS.map(([id, label]) => (
                         <option key={id} value={id}>
@@ -207,14 +206,17 @@ export default function SurgicalSafetyDashboard() {
                   {assessment.issues.length > 0 && (
                     <div
                       role="alert"
-                      className="mb-5 rounded-xl border border-neutral-400 bg-neutral-100 text-black dark:border-neutral-600 dark:bg-neutral-800 dark:text-white p-4 text-xs leading-6 shadow-sm"
+                      className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-900 dark:text-amber-200 p-4 text-xs shadow-2xs"
                     >
-                      <h2 className="font-bold text-black dark:text-white">
-                        {t('incompleteIssues')}
-                      </h2>
-                      <ul className="mt-2 list-inside list-disc space-y-1">
+                      <div className="flex items-center gap-2">
+                        <ClinicalIcon name="warning" size={16} className="text-amber-600 dark:text-amber-400" />
+                        <h2 className="font-bold">
+                          {t('incompleteIssues')}
+                        </h2>
+                      </div>
+                      <ul className="mt-2 list-inside list-disc space-y-1 pl-1">
                         {assessment.issues.map((issue, index) => (
-                          <li key={index} className="font-semibold text-black dark:text-white">{issue}</li>
+                          <li key={index} className="font-medium text-amber-800 dark:text-amber-300">{issue}</li>
                         ))}
                       </ul>
                     </div>
@@ -224,13 +226,13 @@ export default function SurgicalSafetyDashboard() {
                   <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1fr)_340px] 2xl:grid-cols-[minmax(0,1fr)_370px]">
                     <div className="min-w-0 space-y-5">
                       <div id="evidence" className="flex items-center justify-between">
-                        <h2 className="text-lg font-bold text-black dark:text-white">
-                          {t('clinicalEvidence')}
-                          <span className="ml-2 font-mono text-[11px] font-bold text-black dark:text-white rounded-full bg-neutral-200 dark:bg-neutral-800 px-2 py-0.5">
+                        <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                          <span>{t('clinicalEvidence')}</span>
+                          <span className="font-mono text-[10px] font-semibold text-zinc-600 dark:text-zinc-400 rounded-md border border-zinc-200 dark:border-zinc-800 bg-surface px-1.5 py-0.5">
                             {t('checksCount')}
                           </span>
                         </h2>
-                        <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">
+                        <span className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
                           {expiredEvidence ? t('refreshRequired') : t('patientScoped')}
                         </span>
                       </div>
@@ -278,9 +280,9 @@ export default function SurgicalSafetyDashboard() {
               )}
 
               {/* Footer */}
-              <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5 text-xs text-neutral-600 dark:text-neutral-400 font-semibold">
-                <p className="flex items-center gap-2 text-xs leading-5">
-                  <ClinicalIcon name="lock" size={13} className="text-black dark:text-white" />
+              <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5 font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
+                <p className="flex items-center gap-2">
+                  <ClinicalIcon name="lock" size={13} className="text-zinc-400 dark:text-zinc-500" />
                   <span>
                     {session.persistence === 'mongodb' ? 'MongoDB Atlas persistence' : 'Ephemeral demo session'} · {t('sessionEnds')} {formatDate(session.expiresAt)}
                   </span>

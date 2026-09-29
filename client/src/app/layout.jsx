@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning className="min-h-screen bg-surface text-ink antialiased">
         <AppProvider>
           {children}
         </AppProvider>
