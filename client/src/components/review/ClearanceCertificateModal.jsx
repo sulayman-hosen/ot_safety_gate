@@ -63,7 +63,7 @@ export default function ClearanceCertificateModal({ data, assessment, record, em
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-heading text-xl sm:text-2xl font-black tracking-wider text-zinc-900 dark:text-zinc-100">ORBIT SURGICAL GATE</span>
+                <span className="font-heading text-xl sm:text-2xl font-black text-zinc-900 dark:text-zinc-100">ORBIT SURGICAL GATE</span>
                 <span className="rounded bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
                   {isOverridden ? 'EMERGENCY CLEARED' : 'STANDARD CLEARANCE'}
                 </span>
@@ -121,7 +121,7 @@ export default function ClearanceCertificateModal({ data, assessment, record, em
 
         {/* 4 Safety Checks Matrix */}
         <div className="space-y-2">
-          <h3 className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
+          <h3 className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase">
             Evidence Checks Breakdown
           </h3>
           <div className="divide-y divide-line/60 rounded-xl border border-line overflow-hidden font-mono text-xs">
@@ -159,7 +159,7 @@ export default function ClearanceCertificateModal({ data, assessment, record, em
 
         {/* Multi-Disciplinary Signatures */}
         <div className="pt-4 border-t border-line">
-          <h3 className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-4">
+          <h3 className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase mb-4">
             Multi-Disciplinary Surgical Team Attestation
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">

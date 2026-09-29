@@ -132,7 +132,7 @@ export default function EmergencyOverrideModal({ onApply, existingOverride, onCl
                 className="w-full rounded-lg border border-line bg-surface p-2.5 text-xs text-zinc-900 dark:text-zinc-100 font-medium focus:border-rose-500 focus:outline-none"
               >
                 {JUSTIFICATION_PRESETS.map((reason, index) => (
-                  <option key={index} value={reason}>
+                  <option key={index} value={reason} className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100">
                     {reason}
                   </option>
                 ))}

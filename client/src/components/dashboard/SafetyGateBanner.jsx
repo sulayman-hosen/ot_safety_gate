@@ -50,7 +50,7 @@ export default function SafetyGateBanner({ assessment, expiredEvidence, ageMinut
               {title}
             </h2>
             <span
-              className={`rounded px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${
+              className={`rounded px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase ${
                 isOverridden
                   ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30'
                   : good

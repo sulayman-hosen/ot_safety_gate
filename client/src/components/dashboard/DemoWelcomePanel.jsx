@@ -22,7 +22,7 @@ export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) 
 
   return (
     <>
-      <p className="mb-4 font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
+      <p className="mb-4 font-mono text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase">
         {t('workflowSubtitle')}
       </p>
 
@@ -30,14 +30,14 @@ export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) 
       <section className="grid gap-8 rounded-2xl border border-line bg-card p-6 sm:p-8 xl:grid-cols-[1.15fr_1fr] xl:gap-12 xl:p-10 shadow-xs">
         <div className="flex flex-col justify-center py-2">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-[11px] font-mono font-medium tracking-wide text-ink shadow-2xs">
+            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-[11px] font-mono font-medium text-ink shadow-2xs">
               <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <ClinicalIcon name="shield" size={13} className="text-muted" />
               {t('gateBadge')}
             </span>
           </div>
 
-          <h1 className="mt-5 text-4xl font-extrabold tracking-tight sm:text-5xl xl:text-[52px] text-ink leading-[1.12]">
+          <h1 className="mt-5 text-4xl font-extrabold sm:text-5xl xl:text-[52px] text-ink leading-[1.12]">
             {t('welcomeHeroTitle')}{' '}
             <span className="block text-muted font-bold">
               {t('welcomeHeroHighlight')}
@@ -81,7 +81,7 @@ export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) 
                 <span className="size-2.5 rounded-full bg-red-500/70" />
                 <span className="size-2.5 rounded-full bg-amber-500/70" />
                 <span className="size-2.5 rounded-full bg-emerald-500/70" />
-                <span className="ml-2 font-mono text-[10px] text-zinc-400 uppercase tracking-wider">GATE://CHECKLIST-ENGINE</span>
+                <span className="ml-2 font-mono text-[10px] text-zinc-400 uppercase">GATE://CHECKLIST-ENGINE</span>
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono font-medium text-emerald-400">
                 <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -90,7 +90,7 @@ export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) 
             </div>
 
             <div className="mt-5">
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+              <h2 className="text-xl sm:text-2xl font-bold text-white">
                 {t('beforeIncision')}
               </h2>
               <p className="mt-1 whitespace-pre-line text-xs leading-5 text-zinc-400">
@@ -132,7 +132,7 @@ export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) 
           <div>
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <h2 className="font-heading text-base font-bold text-ink sm:text-lg tracking-tight">
+              <h2 className="font-heading text-base font-bold text-ink sm:text-lg">
                 Simulate Real-World OT Scenarios (1-Click Launch)
               </h2>
             </div>

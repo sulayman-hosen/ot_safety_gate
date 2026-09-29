@@ -144,10 +144,10 @@ export default function SurgicalSafetyDashboard() {
               {/* Header Title & Actions */}
               <div className="mb-6 flex flex-wrap items-center justify-between gap-5">
                 <div>
-                  <p className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
+                  <p className="font-mono text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase">
                     {t('safetyWorkspace')}
                   </p>
-                  <h1 className="mt-1.5 text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+                  <h1 className="mt-1.5 text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">
                     {t('safetyGateTitle')}
                   </h1>
                   <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
@@ -185,7 +185,7 @@ export default function SurgicalSafetyDashboard() {
                       className="max-w-56 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 font-mono text-xs font-semibold text-zinc-800 dark:text-zinc-200 shadow-2xs focus:outline-none"
                     >
                       {DEMO_SCENARIOS.map(([id, label]) => (
-                        <option key={id} value={id}>
+                        <option key={id} value={id} className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100">
                           {label}
                         </option>
                       ))}

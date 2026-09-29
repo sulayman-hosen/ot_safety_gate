@@ -21,10 +21,10 @@ export default function PatientContextCard({ data }) {
           <ClinicalIcon name="user" size={22} />
         </div>
         <div>
-          <p className="mb-0.5 font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
+          <p className="mb-0.5 font-mono text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase">
             {t('currentPatient')}
           </p>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
             {formatPatientName(patient)}
           </h2>
         </div>

@@ -33,19 +33,19 @@ export default function AppSidebar({ open, onClose, onNavigate, onHelp }) {
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-heading text-lg font-black tracking-wider text-zinc-900 dark:text-zinc-100">ORBIT</span>
+              <span className="font-heading text-lg font-black text-zinc-900 dark:text-zinc-100">ORBIT</span>
               <span className="rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-1.5 py-0.2 font-mono text-[9px] font-bold text-zinc-600 dark:text-zinc-400">
                 v1.0
               </span>
             </div>
-            <span className="block truncate font-mono text-[9px] font-semibold tracking-wider text-zinc-500 dark:text-zinc-400">
+            <span className="block truncate font-mono text-[9px] font-semibold text-zinc-500 dark:text-zinc-400">
               {t('orbitSubtitle')}
             </span>
           </div>
         </a>
 
         {/* Section title */}
-        <p className="mb-2 px-2 font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
+        <p className="mb-2 px-2 font-mono text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase">
           {t('clinicalWorkspace')}
         </p>
 

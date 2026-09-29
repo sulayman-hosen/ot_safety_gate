@@ -26,17 +26,17 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
         {/* Clinical Role Switcher (Surgeon / Anesthesia / Nurse) */}
         <div className="inline-flex items-center">
           <label htmlFor="header-role-select" className="sr-only">Clinical Role</label>
-          <div className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1 text-xs shadow-2xs">
-            <ClinicalIcon name={activeRole.icon} size={13} className="text-zinc-500" />
+          <div className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1 text-xs shadow-2xs">
+            <ClinicalIcon name={activeRole.icon} size={13} className="text-zinc-500 dark:text-zinc-400" />
             <select
               id="header-role-select"
               value={activeRole.id}
               onChange={e => setActiveRole(e.target.value)}
-              className="bg-transparent font-mono text-[11px] font-semibold text-ink focus:outline-none cursor-pointer"
+              className="bg-transparent font-mono text-[11px] font-semibold text-zinc-800 dark:text-zinc-200 focus:outline-none cursor-pointer"
               title="Switch clinical practitioner perspective"
             >
               {clinicalRoles.map(r => (
-                <option key={r.id} value={r.id} className="bg-card text-ink">
+                <option key={r.id} value={r.id} className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100">
                   {r.badge} · {r.name.split(',')[0]}
                 </option>
               ))}
@@ -47,11 +47,11 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
         {/* Key Terms Guide quick button */}
         <button
           onClick={() => openKeyTerms()}
-          className="hidden md:inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-850 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs cursor-pointer"
           title={t('keyTermsGuide')}
         >
           <ClinicalIcon name="book" size={14} className="text-zinc-500 dark:text-zinc-400" />
-          <span className="hidden lg:inline">{t('keyTermsGuide')}</span>
+          <span className="hidden sm:inline">{t('keyTermsGuide')}</span>
           <span className="rounded bg-zinc-200/80 dark:bg-zinc-800 border border-zinc-300/60 dark:border-zinc-700 px-1.5 py-0.2 font-mono text-[10px] font-bold text-zinc-700 dark:text-zinc-300">
             11
           </span>
@@ -60,7 +60,7 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
         {/* Language Switcher */}
         <button
           onClick={toggleLanguage}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-850 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs cursor-pointer"
           title={t('languageToggle')}
           aria-label={t('languageToggle')}
         >
@@ -71,7 +71,7 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
         {/* Theme Toggle (Dark / Light) */}
         <button
           onClick={toggleTheme}
-          className="grid size-8 place-items-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface text-zinc-600 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-850 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs"
+          className="grid size-8 place-items-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface text-zinc-600 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs cursor-pointer"
           title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           aria-label={t('themeToggle')}
         >
