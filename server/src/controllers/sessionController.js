@@ -18,7 +18,7 @@ export async function openDemoSession(request, response) {
   await saveSession(id, { mode: 'demo', scenario: request.body.scenario, epoch: new Date().toISOString(), expiresAt: Date.now() + ttl * 1000, csrf: randomToken(), actor });
   await audit(id, 'Synthetic session opened');
   await deleteSession(readCookie(request, SESSION_COOKIE));
-  response.cookie(SESSION_COOKIE, id, cookieOptions(ttl)).json({ ok: true });
+  response.cookie(SESSION_COOKIE, id, cookieOptions(ttl, request)).json({ ok: true });
 }
 
 export async function getSessionStatus(request, response) {
@@ -38,5 +38,5 @@ export async function getSessionStatus(request, response) {
 export async function closeSession(request, response) {
   await audit(request.auth.id, 'Session closed');
   await deleteSession(request.auth.id);
-  response.cookie(SESSION_COOKIE, '', cookieOptions(0)).json({ ok: true });
+  response.cookie(SESSION_COOKIE, '', cookieOptions(0, request)).json({ ok: true });
 }

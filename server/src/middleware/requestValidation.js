@@ -2,7 +2,10 @@ import { config } from '../config/environment.js';
 import { assert } from '../utils/AppError.js';
 
 export function requireSameOrigin(request, response, next) {
-  assert(request.get('origin') === config().appUrl, 'Cross-origin request rejected.', 403);
+  const origin = (request.get('origin') || '').trim().replace(/\/$/, '');
+  const cfg = config();
+  const allowed = (cfg.allowedOrigins || [cfg.appUrl]).map(o => (o || '').trim().replace(/\/$/, ''));
+  assert(origin && allowed.includes(origin), 'Cross-origin request rejected.', 403);
   next();
 }
 
