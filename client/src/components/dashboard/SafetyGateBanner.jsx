@@ -101,7 +101,7 @@ export default function SafetyGateBanner({ assessment, expiredEvidence, ageMinut
           </button>
         </div>
 
-        <div className="flex gap-5 text-right border-l border-line pl-4">
+        <div className="flex flex-wrap sm:flex-nowrap gap-4 sm:gap-5 text-left sm:text-right border-t sm:border-t-0 sm:border-l border-line pt-3 sm:pt-0 sm:pl-4 w-full sm:w-auto justify-between sm:justify-end">
           <div>
             <span className="font-heading text-2xl font-black text-zinc-900 dark:text-zinc-100">
               {assessment.passed}

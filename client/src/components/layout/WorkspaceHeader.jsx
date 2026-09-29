@@ -32,7 +32,7 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
               id="header-role-select"
               value={activeRole.id}
               onChange={e => setActiveRole(e.target.value)}
-              className="bg-transparent font-mono text-[11px] font-semibold text-zinc-800 dark:text-zinc-200 focus:outline-none cursor-pointer"
+              className="bg-transparent font-mono text-[11px] font-semibold text-zinc-800 dark:text-zinc-200 focus:outline-none cursor-pointer max-w-[110px] sm:max-w-none truncate"
               title="Switch clinical practitioner perspective"
             >
               {clinicalRoles.map(r => (

@@ -43,18 +43,18 @@
 @layer base {
   * {
     border-color: var(--color-line);
-    letter-spacing: normal;
+    letter-spacing: 0 !important;
   }
 
   *, *::before, *::after {
-    letter-spacing: normal;
+    letter-spacing: 0 !important;
   }
 
   body {
     font-family: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.875rem;
+    font-size: 15px;
     line-height: 1.4rem;
-    letter-spacing: normal;
+    letter-spacing: 0 !important;
     background-color: var(--color-surface);
     color: var(--color-ink);
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -62,24 +62,40 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* All heading tags use Roboto font family with normal letter spacing */
+  /* All heading tags use Roboto font family with 0 letter spacing */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-roboto), Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    letter-spacing: normal;
-    line-height: 1.25;
+    letter-spacing: 0 !important;
+    line-height: 1.28;
   }
 
-  /* All p, span, label, input, button tags use Inter with 1.4rem line height */
-  p, span, label, input, button, select, textarea, li, a, td, th {
+  /* All p tags strictly 16px on all devices */
+  p {
     font-family: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    letter-spacing: normal;
+    font-size: 16px !important;
+    line-height: 1.4rem;
+    letter-spacing: 0 !important;
+  }
+
+  /* All span tags strictly 14px on all devices */
+  span {
+    font-family: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px !important;
+    letter-spacing: 0 !important;
+    line-height: 1.4rem;
+  }
+
+  /* Text inputs, buttons, labels and other text elements */
+  label, input, button, select, textarea, li, a, td, th {
+    font-family: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: 0 !important;
     line-height: 1.4rem;
   }
 
   /* Keep mono font strictly for code / clinical identifier badges */
   code, kbd, samp, pre, .font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    letter-spacing: normal;
+    letter-spacing: 0 !important;
   }
 
   button, select {
@@ -99,12 +115,46 @@
   }
 }
 
-/* Remove letter spacing across all tracking utility classes */
+/* Remove letter spacing across all tracking utility classes on all devices */
+[class*="tracking-"],
+.tracking-tighter,
 .tracking-tight,
+.tracking-normal,
 .tracking-wide,
 .tracking-wider,
 .tracking-widest {
-  letter-spacing: normal !important;
+  letter-spacing: 0 !important;
+}
+
+/* Mobile Responsiveness & Text Scaling (mobile text px barano) */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  /* Elevate micro-texts on mobile so tiny badges & labels are easy to read */
+  .text-\[9px\],
+  .text-\[10px\],
+  .text-\[11px\],
+  .text-xs {
+    font-size: 13px !important;
+    line-height: 1.35rem;
+  }
+
+  .text-sm {
+    font-size: 15px !important;
+    line-height: 1.4rem;
+  }
+
+  /* Mobile touch-friendly targets */
+  button, select {
+    min-height: 38px;
+  }
+
+  /* Generous touch padding for inputs on mobile */
+  input, select, textarea {
+    font-size: 14px !important;
+  }
 }
 
 /* Custom scrollbars for clean developer aesthetic */
