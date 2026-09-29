@@ -15,6 +15,8 @@ export function createApp() {
     next();
   });
   app.use(express.json({ limit: '16kb', strict: true }));
+  // Cloud platform health check endpoint (Render, Railway, uptime monitors)
+  app.get(['/', '/health'], (req, res) => res.status(200).json({ status: 'ok', service: 'ORBIT OT Safety Gate API' }));
   app.use('/api', healthRoutes, sessionRoutes, clinicalCaseRoutes, checklistRecordRoutes);
   app.use(smartLaunchRoutes);
   app.use((request, response) => response.status(404).json({ error: 'Endpoint not found.', code: 'NOT_FOUND' }));
