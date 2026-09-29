@@ -14,6 +14,7 @@ export function useSurgicalSafetyWorkflow() {
   const [attestations, setAttestations] = useState(emptyConfirmations);
   const [notes, setNotes] = useState('');
   const [record, setRecord] = useState(null);
+  const [emergencyOverride, setEmergencyOverride] = useState(null);
   const [clock, setClock] = useState(Date.now());
   const requestKey = useRef(null);
 
@@ -30,6 +31,7 @@ export function useSurgicalSafetyWorkflow() {
       setSnapshot(null);
       resetReview();
       setNotes('');
+      setEmergencyOverride(null);
     }
   }, [resetReview]);
 
@@ -64,7 +66,7 @@ export function useSurgicalSafetyWorkflow() {
   useEffect(() => { if (!toast) return; const timer = setTimeout(() => setToast(''), 6000); return () => clearTimeout(timer); }, [toast]);
 
   async function openDemo(scenario = 'complete') {
-    setBusy(true); setError(''); setSnapshot(null); setNotes(''); resetReview();
+    setBusy(true); setError(''); setSnapshot(null); setNotes(''); resetReview(); setEmergencyOverride(null);
     try {
       await apiRequest('/api/demo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scenario }) });
       await loadSession();
@@ -74,7 +76,10 @@ export function useSurgicalSafetyWorkflow() {
 
   async function refreshEvidence(procedureId = snapshot?.assessment.selected?.id) {
     setBusy(true); setError('');
-    try { await loadCase(procedureId); setToast('Evidence refreshed. Please reconfirm the team review.'); }
+    try {
+      await loadCase(procedureId);
+      setToast('Evidence refreshed. Please reconfirm the team review.');
+    }
     catch (error) { setSnapshot(null); resetReview(); reportError(error); }
     finally { setBusy(false); }
   }
@@ -83,20 +88,47 @@ export function useSurgicalSafetyWorkflow() {
     setBusy(true); setError('');
     try {
       await apiRequest('/api/logout', { method: 'POST', headers: { 'x-csrf-token': session.csrf } });
-      setSession(null); setSnapshot(null); setNotes(''); resetReview();
+      setSession(null); setSnapshot(null); setNotes(''); resetReview(); setEmergencyOverride(null);
       await loadSession();
     } catch (error) { reportError(error); }
     finally { setBusy(false); }
   }
 
+  function applyEmergencyOverride(overrideData) {
+    setEmergencyOverride(overrideData);
+    setRecord(null);
+    setToast('Emergency clinical override recorded. Attestation unlocked under lead physician authority.');
+  }
+
+  function clearEmergencyOverride() {
+    setEmergencyOverride(null);
+    setRecord(null);
+    setToast('Emergency override cleared. Standard clinical policy restored.');
+  }
+
   async function saveRecord(draft) {
     setBusy(true); setError('');
-    const input = { draft, notes, attestations, procedureId: snapshot.assessment.selected?.id || null, fingerprint: snapshot.fingerprint };
+    const input = {
+      draft,
+      notes: emergencyOverride
+        ? `[EMERGENCY CLINICAL OVERRIDE: ${emergencyOverride.reason}] ${notes}`.trim()
+        : notes,
+      attestations,
+      procedureId: snapshot?.assessment.selected?.id || null,
+      fingerprint: snapshot?.fingerprint,
+      emergencyOverride: emergencyOverride || null
+    };
     const serialized = JSON.stringify(input);
     if (requestKey.current?.payload !== serialized) requestKey.current = { payload: serialized, key: crypto.randomUUID() };
     try {
       const value = await apiRequest('/api/records', {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'x-csrf-token': session.csrf, 'idempotency-key': requestKey.current.key }, body: serialized
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-csrf-token': session.csrf,
+          'idempotency-key': requestKey.current.key
+        },
+        body: serialized
       });
       setRecord(value);
       setToast(draft ? 'Draft saved. Export files are ready.' : 'Reviewed checklist recorded. Export files are ready.');
@@ -107,12 +139,17 @@ export function useSurgicalSafetyWorkflow() {
   }
 
   const ageMinutes = snapshot ? Math.max(0, Math.floor((clock - Date.parse(snapshot.data.fetchedAt)) / 60000)) : 0;
+  const isReviewable = snapshot?.assessment.status === 'reviewable' || emergencyOverride !== null;
+
   return {
     session, snapshot, loading, busy, error, toast, capabilities, attestations, notes, record,
     ageMinutes, expiredEvidence: ageMinutes >= 5,
-    canReview: snapshot?.assessment.status === 'reviewable' && session?.actor.canAttest,
+    canReview: isReviewable && Boolean(session?.actor.canAttest),
     allChecked: Object.values(attestations).every(Boolean),
     confirmedCount: Object.values(attestations).filter(Boolean).length,
+    emergencyOverride,
+    applyEmergencyOverride,
+    clearEmergencyOverride,
     setError,
     setAttestations: value => { setAttestations(value); setRecord(null); },
     setNotes: value => { setNotes(value); setRecord(null); },

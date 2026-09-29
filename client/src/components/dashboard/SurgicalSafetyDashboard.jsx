@@ -19,6 +19,8 @@ import EvidenceDialog from '@/components/evidence/EvidenceDialog.jsx';
 import KeyTermsDialog from '@/components/knowledge/KeyTermsDialog.jsx';
 import TeamReviewPanel from '@/components/review/TeamReviewPanel.jsx';
 import ClinicalDocumentExports from '@/components/review/ClinicalDocumentExports.jsx';
+import EmergencyOverrideModal from '@/components/review/EmergencyOverrideModal.jsx';
+import ClearanceCertificateModal from '@/components/review/ClearanceCertificateModal.jsx';
 import { useApp } from '@/context/AppContext.jsx';
 
 function WorkspaceLoading({ busy = true }) {
@@ -134,7 +136,7 @@ export default function SurgicalSafetyDashboard() {
             <DemoWelcomePanel
               demoEnabled={capabilities.demoEnabled}
               busy={busy}
-              onDemo={() => openDemo()}
+              onDemo={scenario => openDemo(scenario)}
               onHelp={() => setDialogSection('help')}
             />
           ) : (
@@ -201,6 +203,7 @@ export default function SurgicalSafetyDashboard() {
                     assessment={assessment}
                     expiredEvidence={expiredEvidence}
                     ageMinutes={ageMinutes}
+                    emergencyOverride={workflow.emergencyOverride}
                   />
 
                   {assessment.issues.length > 0 && (
@@ -309,6 +312,19 @@ export default function SurgicalSafetyDashboard() {
       />
 
       <KeyTermsDialog />
+
+      <EmergencyOverrideModal
+        onApply={workflow.applyEmergencyOverride}
+        existingOverride={workflow.emergencyOverride}
+        onClear={workflow.clearEmergencyOverride}
+      />
+
+      <ClearanceCertificateModal
+        data={data}
+        assessment={assessment}
+        record={record}
+        emergencyOverride={workflow.emergencyOverride}
+      />
     </div>
   );
 }

@@ -3,8 +3,7 @@ import ClinicalIcon from '@/components/ui/ClinicalIcon.jsx';
 import { useApp } from '@/context/AppContext.jsx';
 
 export default function WorkspaceHeader({ session, onToggleNavigation }) {
-  const { theme, toggleTheme, language, toggleLanguage, t, openKeyTerms } = useApp();
-  const initials = session?.actor?.name?.split(' ').slice(0, 2).map(part => part[0]).join('') || 'OT';
+  const { theme, toggleTheme, language, toggleLanguage, t, openKeyTerms, activeRole, setActiveRole, clinicalRoles } = useApp();
 
   return (
     <header className="flex h-16 items-center justify-between gap-3 border-b border-line bg-card/80 px-4 backdrop-blur-xs sm:px-8">
@@ -22,16 +21,37 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
         <span className="truncate font-semibold text-zinc-900 dark:text-zinc-100">{t('preSurgicalChecklist')}</span>
       </div>
 
-      {/* Right section: Key Terms, Lang switch, Theme toggle, Status & User initials */}
+      {/* Right section: Role Switcher, Key Terms, Lang switch, Theme toggle, Status & User */}
       <div className="flex items-center gap-2 sm:gap-2.5">
+        {/* Clinical Role Switcher (Surgeon / Anesthesia / Nurse) */}
+        <div className="inline-flex items-center">
+          <label htmlFor="header-role-select" className="sr-only">Clinical Role</label>
+          <div className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1 text-xs shadow-2xs">
+            <ClinicalIcon name={activeRole.icon} size={13} className="text-zinc-500" />
+            <select
+              id="header-role-select"
+              value={activeRole.id}
+              onChange={e => setActiveRole(e.target.value)}
+              className="bg-transparent font-mono text-[11px] font-semibold text-ink focus:outline-none cursor-pointer"
+              title="Switch clinical practitioner perspective"
+            >
+              {clinicalRoles.map(r => (
+                <option key={r.id} value={r.id} className="bg-card text-ink">
+                  {r.badge} · {r.name.split(',')[0]}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         {/* Key Terms Guide quick button */}
         <button
           onClick={() => openKeyTerms()}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-850 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs"
+          className="hidden md:inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-850 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-2xs"
           title={t('keyTermsGuide')}
         >
           <ClinicalIcon name="book" size={14} className="text-zinc-500 dark:text-zinc-400" />
-          <span className="hidden sm:inline">{t('keyTermsGuide')}</span>
+          <span className="hidden lg:inline">{t('keyTermsGuide')}</span>
           <span className="rounded bg-zinc-200/80 dark:bg-zinc-800 border border-zinc-300/60 dark:border-zinc-700 px-1.5 py-0.2 font-mono text-[10px] font-bold text-zinc-700 dark:text-zinc-300">
             11
           </span>
@@ -59,7 +79,7 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
         </button>
 
         {/* Session Status indicator */}
-        <div className="hidden items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1 text-[11px] font-medium text-zinc-700 dark:text-zinc-300 min-[540px]:inline-flex shadow-2xs">
+        <div className="hidden items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-surface px-2.5 py-1 text-[11px] font-medium text-zinc-700 dark:text-zinc-300 min-[900px]:inline-flex shadow-2xs">
           <span className={`size-1.5 rounded-full ${session ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'}`} />
           <span className="font-mono text-[11px]">
             {session ? (session.mode === 'demo' ? t('syntheticDemo') : t('ehrConnected')) : t('awaitingLaunch')}
@@ -69,9 +89,9 @@ export default function WorkspaceHeader({ session, onToggleNavigation }) {
         {/* Reviewer Avatar */}
         <span
           className="grid size-8 shrink-0 place-items-center rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 font-mono text-xs font-bold text-zinc-800 dark:text-zinc-200 shadow-2xs"
-          title={session?.actor?.name || 'Reviewer'}
+          title={`${activeRole.name} (${activeRole.role})`}
         >
-          {initials}
+          {activeRole.initials}
         </span>
       </div>
     </header>

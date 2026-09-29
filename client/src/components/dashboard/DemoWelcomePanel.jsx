@@ -2,6 +2,7 @@
 import ClinicalIcon from '@/components/ui/ClinicalIcon.jsx';
 import ActionButton from '@/components/ui/ActionButton.jsx';
 import { useApp } from '@/context/AppContext.jsx';
+import { SCENARIO_METADATA } from '@/constants/checklistConstants.js';
 
 export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) {
   const { t, openKeyTerms } = useApp();
@@ -122,6 +123,71 @@ export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) 
             </span>
             <span className="text-zinc-500">FHIR R4 · WHO-SST</span>
           </div>
+        </div>
+      </section>
+
+      {/* 1-Click Interactive Clinical Scenarios Bar */}
+      <section className="mt-6 rounded-2xl border border-line bg-card p-5 sm:p-6 shadow-xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+              <h2 className="font-heading text-base font-bold text-ink sm:text-lg tracking-tight">
+                Simulate Real-World OT Scenarios (1-Click Launch)
+              </h2>
+            </div>
+            <p className="mt-1 text-xs text-muted">
+              Select any synthetic clinical condition below to test safety-gate detection, missing evidence warnings, and emergency protocols:
+            </p>
+          </div>
+          <span className="font-mono text-[10px] font-semibold text-muted rounded-full border border-line px-2.5 py-1">
+            5 CLINICAL PRESETS
+          </span>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {Object.values(SCENARIO_METADATA).map(sc => {
+            const isRed = sc.badgeColor === 'rose';
+            const isAmber = sc.badgeColor === 'amber';
+            const isGreen = sc.badgeColor === 'emerald';
+            return (
+              <button
+                key={sc.id}
+                type="button"
+                disabled={busy}
+                onClick={() => onDemo(sc.id)}
+                className="group relative flex flex-col justify-between rounded-xl border border-line bg-surface p-3.5 text-left transition-all hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-xs disabled:opacity-50"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-1.5">
+                    <span className="font-mono text-[9px] font-bold text-muted uppercase">CASE {sc.id}</span>
+                    <span
+                      className={`rounded px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-tight ${
+                        isGreen
+                          ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                          : isRed
+                          ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20'
+                          : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                      }`}
+                    >
+                      {sc.badge}
+                    </span>
+                  </div>
+                  <h3 className="mt-2 text-xs font-bold text-ink group-hover:underline line-clamp-1">
+                    {sc.title}
+                  </h3>
+                  <p className="mt-1 font-mono text-[10px] text-muted line-clamp-2">
+                    {sc.procedure}
+                  </p>
+                </div>
+
+                <div className="mt-3 pt-2 border-t border-line/60 flex items-center justify-between font-mono text-[10px] text-muted">
+                  <span className="group-hover:text-ink font-semibold">Launch case →</span>
+                  <ClinicalIcon name="arrow" size={11} className="group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </button>
+            );
+          })}
         </div>
       </section>
 

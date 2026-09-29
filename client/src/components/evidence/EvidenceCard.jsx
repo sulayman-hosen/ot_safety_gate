@@ -13,7 +13,7 @@ export function EvidenceDetail({ label, children }) {
 }
 
 export default function EvidenceCard({ check, number, icon, onInspect, children }) {
-  const { t, language } = useApp();
+  const { t, language, activeRole } = useApp();
 
   const titleEnMap = {
     procedure: 'Procedure & diagnosis',
@@ -31,18 +31,32 @@ export default function EvidenceCard({ check, number, icon, onInspect, children 
 
   const title = (language === 'bn' ? titleBnMap[check.id] : titleEnMap[check.id]) || check.title;
   const isPass = check.status === 'pass';
+  const isAssigned = activeRole?.focusAreas?.includes(check.id);
 
   return (
-    <article className="flex flex-col rounded-xl border border-line bg-card p-5 sm:p-6 shadow-2xs hover:shadow-xs transition-shadow">
+    <article
+      className={`flex flex-col rounded-xl border bg-card p-5 sm:p-6 shadow-2xs hover:shadow-xs transition-all ${
+        isAssigned
+          ? 'border-zinc-300 dark:border-zinc-700 ring-1 ring-zinc-200 dark:ring-zinc-800'
+          : 'border-line'
+      }`}
+    >
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="grid size-10 place-items-center rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xs">
             <ClinicalIcon name={icon} size={18} />
           </div>
           <div>
-            <p className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
-              {language === 'bn' ? `যাচাই ${number}` : `CHECK ${number}`}
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 dark:text-zinc-500 uppercase">
+                {language === 'bn' ? `যাচাই ${number}` : `CHECK ${number}`}
+              </p>
+              {isAssigned && (
+                <span className="rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-1.5 py-0.2 font-mono text-[9px] font-bold text-zinc-600 dark:text-zinc-300">
+                  {activeRole.badge} FOCUS
+                </span>
+              )}
+            </div>
             <h3 className="mt-0.5 text-base font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
               {title}
             </h3>

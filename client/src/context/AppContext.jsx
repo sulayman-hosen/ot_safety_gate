@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { TRANSLATIONS } from '@/constants/translations.js';
+import { CLINICAL_ROLES } from '@/constants/checklistConstants.js';
 
 const AppContext = createContext(null);
 
@@ -9,6 +10,9 @@ export function AppProvider({ children }) {
   const [language, setLanguageState] = useState('en');
   const [keyTermsOpen, setKeyTermsOpen] = useState(false);
   const [selectedTermId, setSelectedTermId] = useState(null);
+  const [emergencyModalOpen, setEmergencyModalOpen] = useState(false);
+  const [clearanceModalOpen, setClearanceModalOpen] = useState(false);
+  const [activeRoleId, setActiveRoleId] = useState('surgeon');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -32,6 +36,16 @@ export function AppProvider({ children }) {
       const savedLang = localStorage.getItem('orbit_language');
       if (savedLang === 'bn' || savedLang === 'en') {
         setLanguageState(savedLang);
+      }
+    } catch {
+      // fallback
+    }
+
+    // 3. Role initialization
+    try {
+      const savedRole = localStorage.getItem('orbit_role');
+      if (savedRole && CLINICAL_ROLES.some(r => r.id === savedRole)) {
+        setActiveRoleId(savedRole);
       }
     } catch {
       // fallback
@@ -65,6 +79,14 @@ export function AppProvider({ children }) {
     setLanguage(language === 'en' ? 'bn' : 'en');
   }
 
+  function setActiveRole(roleId) {
+    if (!CLINICAL_ROLES.some(r => r.id === roleId)) return;
+    setActiveRoleId(roleId);
+    try {
+      localStorage.setItem('orbit_role', roleId);
+    } catch {}
+  }
+
   function t(key, fallback = '') {
     return TRANSLATIONS[language]?.[key] ?? TRANSLATIONS.en?.[key] ?? fallback ?? key;
   }
@@ -79,6 +101,26 @@ export function AppProvider({ children }) {
     setSelectedTermId(null);
   }
 
+  function openEmergencyModal() {
+    setEmergencyModalOpen(true);
+  }
+
+  function closeEmergencyModal() {
+    setEmergencyModalOpen(false);
+  }
+
+  function openClearanceModal() {
+    setClearanceModalOpen(true);
+  }
+
+  function closeClearanceModal() {
+    setClearanceModalOpen(false);
+  }
+
+  const activeRole = useMemo(() => {
+    return CLINICAL_ROLES.find(r => r.id === activeRoleId) || CLINICAL_ROLES[0];
+  }, [activeRoleId]);
+
   const value = useMemo(() => ({
     theme,
     toggleTheme,
@@ -90,8 +132,28 @@ export function AppProvider({ children }) {
     selectedTermId,
     openKeyTerms,
     closeKeyTerms,
+    emergencyModalOpen,
+    openEmergencyModal,
+    closeEmergencyModal,
+    clearanceModalOpen,
+    openClearanceModal,
+    closeClearanceModal,
+    activeRole,
+    activeRoleId,
+    setActiveRole,
+    clinicalRoles: CLINICAL_ROLES,
     mounted
-  }), [theme, language, keyTermsOpen, selectedTermId, mounted]);
+  }), [
+    theme,
+    language,
+    keyTermsOpen,
+    selectedTermId,
+    emergencyModalOpen,
+    clearanceModalOpen,
+    activeRole,
+    activeRoleId,
+    mounted
+  ]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
