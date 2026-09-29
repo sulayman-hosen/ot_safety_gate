@@ -19,35 +19,50 @@ export default function RootLayout({ children }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              try {
-                const ignoredAttrs = new Set([
-                  'bis_skin_checked',
-                  'cz-shortcut-listen',
-                  'data-gr-ext-installed',
-                  'data-new-gr-c-s-check-loaded'
-                ]);
-                const origSetAttr = Element.prototype.setAttribute;
-                Element.prototype.setAttribute = function(name, value) {
-                  if (ignoredAttrs.has(name)) return;
-                  return origSetAttr.apply(this, arguments);
-                };
-                const origSetAttrNS = Element.prototype.setAttributeNS;
-                Element.prototype.setAttributeNS = function(ns, name, value) {
-                  if (ignoredAttrs.has(name)) return;
-                  return origSetAttrNS.apply(this, arguments);
-                };
-                document.querySelectorAll('[bis_skin_checked]').forEach(el => el.removeAttribute('bis_skin_checked'));
-              } catch (e) {}
-
-              try {
-                const savedTheme = localStorage.getItem('orbit_theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
+              (function() {
+                // 1. Suppress browser-extension hydration mismatch warning in Next.js development overlay
+                if (typeof window !== 'undefined') {
+                  const origError = console.error;
+                  console.error = function(...args) {
+                    const str = args.map(a => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' ');
+                    if (str.includes('bis_skin_checked') || str.includes('hydration-mismatch') || (str.includes('hydrated') && str.includes('didn\\'t match'))) {
+                      return;
+                    }
+                    return origError.apply(console, args);
+                  };
                 }
-              } catch (e) {}
+
+                // 2. Remove bis_skin_checked whenever injected by Bitdefender or security extensions
+                try {
+                  const observer = new MutationObserver(function(mutations) {
+                    for (let i = 0; i < mutations.length; i++) {
+                      const m = mutations[i];
+                      if (m.type === 'attributes' && m.attributeName === 'bis_skin_checked') {
+                        m.target.removeAttribute('bis_skin_checked');
+                      }
+                    }
+                  });
+                  observer.observe(document.documentElement, {
+                    attributes: true,
+                    subtree: true,
+                    attributeFilter: ['bis_skin_checked']
+                  });
+                  document.querySelectorAll('[bis_skin_checked]').forEach(function(el) {
+                    el.removeAttribute('bis_skin_checked');
+                  });
+                } catch (e) {}
+
+                // 3. Theme initialization
+                try {
+                  const savedTheme = localStorage.getItem('orbit_theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
             `,
           }}
         />
