@@ -50,11 +50,11 @@ export default function DemoWelcomePanel({ demoEnabled, busy, onDemo, onHelp }) 
 
           <div className="mt-7 flex flex-wrap gap-2.5">
             {demoEnabled && (
-              <ActionButton icon="arrow" busy={busy} disabled={busy} onClick={onDemo}>
+              <ActionButton icon="arrow" busy={busy} disabled={busy} onClick={() => onDemo('complete')}>
                 {t('openDemo')}
               </ActionButton>
             )}
-            <ActionButton variant="secondary" icon="external" onClick={onHelp}>
+            <ActionButton variant="secondary" icon="external" onClick={() => onHelp?.()}>
               {t('connectEhr')}
             </ActionButton>
             <ActionButton variant="secondary" icon="book" onClick={() => openKeyTerms()}>

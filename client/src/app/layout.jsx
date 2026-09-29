@@ -24,10 +24,17 @@ export default function RootLayout({ children }) {
                 if (typeof window !== 'undefined') {
                   const origError = console.error;
                   console.error = function(...args) {
-                    const str = args.map(a => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' ');
-                    if (str.includes('bis_skin_checked') || str.includes('hydration-mismatch') || (str.includes('hydrated') && str.includes('didn\\'t match'))) {
-                      return;
-                    }
+                    try {
+                      const str = args.map(a => {
+                        if (typeof a === 'object' && a !== null) {
+                          try { return JSON.stringify(a); } catch { return String(a); }
+                        }
+                        return String(a);
+                      }).join(' ');
+                      if (str.includes('bis_skin_checked') || str.includes('hydration-mismatch') || (str.includes('hydrated') && str.includes('didn\\'t match'))) {
+                        return;
+                      }
+                    } catch (e) {}
                     return origError.apply(console, args);
                   };
                 }

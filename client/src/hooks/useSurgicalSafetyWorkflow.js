@@ -66,18 +66,20 @@ export function useSurgicalSafetyWorkflow() {
   useEffect(() => { if (!toast) return; const timer = setTimeout(() => setToast(''), 6000); return () => clearTimeout(timer); }, [toast]);
 
   async function openDemo(scenario = 'complete') {
+    const selectedScenario = typeof scenario === 'string' && scenario.trim() ? scenario.trim() : 'complete';
     setBusy(true); setError(''); setSnapshot(null); setNotes(''); resetReview(); setEmergencyOverride(null);
     try {
-      await apiRequest('/api/demo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scenario }) });
+      await apiRequest('/api/demo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scenario: selectedScenario }) });
       await loadSession();
     } catch (error) { reportError(error); }
     finally { setBusy(false); }
   }
 
-  async function refreshEvidence(procedureId = snapshot?.assessment.selected?.id) {
+  async function refreshEvidence(procedureId) {
+    const safeProcedureId = typeof procedureId === 'string' ? procedureId : snapshot?.assessment.selected?.id;
     setBusy(true); setError('');
     try {
-      await loadCase(procedureId);
+      await loadCase(safeProcedureId);
       setToast('Evidence refreshed. Please reconfirm the team review.');
     }
     catch (error) { setSnapshot(null); resetReview(); reportError(error); }
@@ -87,7 +89,9 @@ export function useSurgicalSafetyWorkflow() {
   async function closeSession() {
     setBusy(true); setError('');
     try {
-      await apiRequest('/api/logout', { method: 'POST', headers: { 'x-csrf-token': session.csrf } });
+      if (session?.csrf) {
+        await apiRequest('/api/logout', { method: 'POST', headers: { 'x-csrf-token': session.csrf } });
+      }
       setSession(null); setSnapshot(null); setNotes(''); resetReview(); setEmergencyOverride(null);
       await loadSession();
     } catch (error) { reportError(error); }
@@ -106,10 +110,11 @@ export function useSurgicalSafetyWorkflow() {
     setToast('Emergency override cleared. Standard clinical policy restored.');
   }
 
-  async function saveRecord(draft) {
+  async function saveRecord(draft = false) {
+    const isDraft = draft === true;
     setBusy(true); setError('');
     const input = {
-      draft,
+      draft: isDraft,
       notes: emergencyOverride
         ? `[EMERGENCY CLINICAL OVERRIDE: ${emergencyOverride.reason}] ${notes}`.trim()
         : notes,
@@ -131,7 +136,7 @@ export function useSurgicalSafetyWorkflow() {
         body: serialized
       });
       setRecord(value);
-      setToast(draft ? 'Draft saved. Export files are ready.' : 'Reviewed checklist recorded. Export files are ready.');
+      setToast(isDraft ? 'Draft saved. Export files are ready.' : 'Reviewed checklist recorded. Export files are ready.');
     } catch (error) {
       reportError(error);
       if (error.code === 'EVIDENCE_CHANGED') { resetReview(); await loadCase(input.procedureId).catch(reportError); }

@@ -136,7 +136,7 @@ export default function SurgicalSafetyDashboard() {
             <DemoWelcomePanel
               demoEnabled={capabilities.demoEnabled}
               busy={busy}
-              onDemo={scenario => openDemo(scenario)}
+              onDemo={scenario => openDemo(typeof scenario === 'string' ? scenario : 'complete')}
               onHelp={() => setDialogSection('help')}
             />
           ) : (
@@ -295,7 +295,7 @@ export default function SurgicalSafetyDashboard() {
                   icon="exit"
                   className="min-h-8 px-3 py-1 text-xs"
                   disabled={busy}
-                  onClick={closeSession}
+                  onClick={() => closeSession()}
                 >
                   {t('endSession')}
                 </ActionButton>
