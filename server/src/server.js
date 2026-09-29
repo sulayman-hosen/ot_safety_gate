@@ -20,6 +20,7 @@ try {
   }
   const port = Number(process.env.PORT || 5000);
   const host = '0.0.0.0';
+  console.log(`Starting Express API on ${host}:${port}...`);
   const server = createApp().listen(port, host, () => console.log(`Express API listening at http://${host}:${port} (${settings.memory ? 'synthetic memory demo' : 'MongoDB / Mongoose'})`));
   server.on('error', (err) => { console.error('API listener failed:', err); process.exitCode = 1; });
   for (const signal of ['SIGINT', 'SIGTERM']) {
