@@ -19,9 +19,9 @@ try {
     }
   }
   const port = Number(process.env.PORT || 5000);
-  const host = process.env.SERVER_HOST || '0.0.0.0';
+  const host = '0.0.0.0';
   const server = createApp().listen(port, host, () => console.log(`Express API listening at http://${host}:${port} (${settings.memory ? 'synthetic memory demo' : 'MongoDB / Mongoose'})`));
-  server.on('error', () => { console.error('API listener failed. Check PORT and SERVER_HOST.'); process.exitCode = 1; });
+  server.on('error', (err) => { console.error('API listener failed:', err); process.exitCode = 1; });
   for (const signal of ['SIGINT', 'SIGTERM']) {
     process.once(signal, () => server.close(async () => { await disconnectDatabase(); process.exit(0); }));
   }
