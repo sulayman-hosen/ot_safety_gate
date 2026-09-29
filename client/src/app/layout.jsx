@@ -20,6 +20,26 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: `
               try {
+                const ignoredAttrs = new Set([
+                  'bis_skin_checked',
+                  'cz-shortcut-listen',
+                  'data-gr-ext-installed',
+                  'data-new-gr-c-s-check-loaded'
+                ]);
+                const origSetAttr = Element.prototype.setAttribute;
+                Element.prototype.setAttribute = function(name, value) {
+                  if (ignoredAttrs.has(name)) return;
+                  return origSetAttr.apply(this, arguments);
+                };
+                const origSetAttrNS = Element.prototype.setAttributeNS;
+                Element.prototype.setAttributeNS = function(ns, name, value) {
+                  if (ignoredAttrs.has(name)) return;
+                  return origSetAttrNS.apply(this, arguments);
+                };
+                document.querySelectorAll('[bis_skin_checked]').forEach(el => el.removeAttribute('bis_skin_checked'));
+              } catch (e) {}
+
+              try {
                 const savedTheme = localStorage.getItem('orbit_theme');
                 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
